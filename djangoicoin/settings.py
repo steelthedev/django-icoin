@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'djangoicoin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -95,7 +95,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'muntpay',
+        'NAME': 'munt4',
         'USER':'root',
         'PASSWORD':'kalel2000',
         'HOST':'localhost',
@@ -106,7 +106,6 @@ DATABASES = {
     }
 }
 
-"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -1,7 +1,3 @@
-from email.mime import image
-from tkinter.tix import Tree
-from tokenize import blank_re
-from unicodedata import decimal
 
 from django.conf import settings
 from packages.models import Packages
@@ -46,7 +42,7 @@ class Transaction(models.Model):
 
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, related_name="profile", null=True)
     type = models.CharField(max_length=200, choices=TYPE_CHOICES)
-    amount = models.DecimalField(max_digits=100, decimal_places=3)
+    amount = models.DecimalField(max_digits=30, decimal_places=3)
     transaction_date = models.DateTimeField(auto_now_add=True)
     transaction_id =  models.CharField(max_length=400)
     status = models.CharField(max_length=200, choices=STATUS_CHOICES, default=PENDING)

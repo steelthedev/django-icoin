@@ -81,7 +81,7 @@ class OrderSerializer(serializers.ModelSerializer):
                             refree_wallet.save()
                     except:
                         pass
-                raise serializers.ValidationError({'error:"An error occured"'})
+                
             return order
         return Http404 
    
