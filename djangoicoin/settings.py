@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=5pz%#6tsl$**r(o+%pt8)3bjm!11lc65mzw$h!il776!kwk!3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '178.79.137.116', 'api.muntpay.com', '127.0.0.1']
 
@@ -199,6 +199,7 @@ CORS_ALLOW_HEADERS = [
     'accept-encoding',
     'authorization',
     'content-type',
+    'content-disposition',
     'dnt',
     'origin',
     'user-agent',

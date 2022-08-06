@@ -54,9 +54,9 @@ class Transaction(models.Model):
     def __str__(self) -> str:
         return f" {self.profile} - {self.transaction_date}"
 
-    def get_transaction_image(self):
-        if image:
-            return settings.LOCAL_URL + self.image.url
+    def get_transaction_picture(self):
+        if self.image:
+            return settings.WEBSITE_URL + self.image.url
 
 class Bank(models.Model):
     bank_name = models.CharField(max_length=500)
@@ -70,14 +70,14 @@ class Bank(models.Model):
 class Wallet(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name="user")
     profile = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name="wallet_profile")
-    wallet_balance = models.IntegerField(default=0.00)
-    wallet_address = models.CharField(max_length=500, null=True)
-    account_number = models.CharField(max_length=500, null=True)
-    account_name = models.CharField(max_length=500, null=True)
-    referral_balance = models.IntegerField(default=0.00)
-    investment_balance = models.IntegerField(default=0.00)
-    referral_count = models.IntegerField(null=True, default=0)
-    investment_progress = models.IntegerField(null=True, default=0)
+    wallet_balance = models.IntegerField(default=0.00, null=True, blank=True)
+    wallet_address = models.CharField(max_length=500, null=True,blank=True)
+    account_number = models.CharField(max_length=500, null=True,blank=True)
+    account_name = models.CharField(max_length=500, null=True, blank=True)
+    referral_balance = models.IntegerField(default=0.00,blank=True,null=True)
+    investment_balance = models.IntegerField(default=0.00, null=True, blank=True)
+    referral_count = models.IntegerField(null=True, default=0, blank=True)
+    investment_progress = models.IntegerField(null=True, default=0,blank=True)
     Active_investment = models.ForeignKey(Packages, blank=True,on_delete=models.SET_NULL, null=True, related_name="active_investment" )
     bank = models.ForeignKey(Bank, on_delete=models.SET_NULL, null=True, blank=True)
     

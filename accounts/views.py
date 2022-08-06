@@ -33,12 +33,15 @@ def RegisterView(request):
             account.profile.email = account.email
             account.profile.phone = request.data.get("phone",'')
             referral_code =  request.data.get("referral_code",'')
-            if referral_code:
-                refree = Profile.objects.get(referral_code = referral_code)
-                Referral.objects.create(profile=refree, referred = account.profile)
-                refree_wallet = Wallet.objects.get(profile = refree)
-                refree_wallet.referral_count += 1
-                refree_wallet.save() 
+            try:
+                if referral_code:
+                    refree = Profile.objects.get(referral_code = referral_code)
+                    Referral.objects.create(profile=refree, referred = account.profile)
+                    refree_wallet = Wallet.objects.get(profile = refree)
+                    refree_wallet.referral_count += 1
+                    refree_wallet.save()
+            except:
+                pass 
             account.save()
         else:
             return HttpResponse( status = 201 )
