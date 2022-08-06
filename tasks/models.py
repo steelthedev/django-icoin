@@ -31,7 +31,7 @@ class Task(models.Model):
         if self.image:
             return settings.WEBSITE_URL + self.image.url
 
-   
+    
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def update_task_signal(sender, instance, created, **kwargs):
