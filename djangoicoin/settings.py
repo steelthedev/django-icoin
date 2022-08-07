@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=5pz%#6tsl$**r(o+%pt8)3bjm!11lc65mzw$h!il776!kwk!3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '178.79.137.116', 'api.muntpay.com', '127.0.0.1']
 
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'djangoicoin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -107,6 +107,7 @@ DATABASES = {
     }
 }
 
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

@@ -29,7 +29,7 @@ class Task(models.Model):
 
     def get_task_picture(self):
         if self.image:
-            return settings.WEBSITE_URL + self.image.url
+            return settings.LOCAL_URL + self.image.url
 
    
 

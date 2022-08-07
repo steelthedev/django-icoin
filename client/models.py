@@ -56,7 +56,7 @@ class Transaction(models.Model):
 
     def get_transaction_picture(self):
         if self.image:
-            return settings.WEBSITE_URL + self.image.url
+            return settings.LOCAL_URL + self.image.url
 
 class Bank(models.Model):
     bank_name = models.CharField(max_length=500)
