@@ -104,8 +104,10 @@ def ApproveTransaction(request,id):
                             else:
                                 transaction.delete()
                         elif transaction.type == Transaction.DEPOSIT:
-                            wallet=Wallet.objects.get(profile=transaction.profile)
-                            wallet.wallet_balance = round(transaction.amount / 0.001795)
+                            
+                            wallet = Wallet.objects.get(profile=transaction.profile)
+                            wallet_b = round(float(transaction.amount) / 0.001795)
+                            wallet.wallet_balance += wallet_b 
                             wallet.save()
                     except:
                         return Response(status=401)
