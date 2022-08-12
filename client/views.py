@@ -81,12 +81,12 @@ def ApproveTransaction(request,id):
                 try:
                     if transaction.type == Transaction.WITHDRAWAL:
                         wallet = Wallet.objects.get(profile=transaction.profile)
-                        withdrawable = int(wallet.wallet_balance + wallet.investment_balance)  
+                        withdrawable = wallet.wallet_balance + wallet.investment_balance  
                         
                         try:
                             if transaction.mode == Transaction.BANK:
                                 if not withdrawable < transaction.amount: 
-                                    wallet_b = wallet.wallet_balance - transaction.amount
+                                    wallet_b = withdrawable - transaction.amount
                                     if wallet_b <= 0:
                                         wallet.wallet_balance = 0
                                     wallet.wallet_balance = wallet_b
