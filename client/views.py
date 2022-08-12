@@ -86,7 +86,7 @@ def ApproveTransaction(request,id):
                         
                         try:
                             if transaction.mode == Transaction.BANK:
-                                if not wallet.wallet_balance < transaction.amount: 
+                                if not withdrawable < transaction.amount: 
                                     wallet_b = wallet.wallet_balance - transaction.amount
                                     if wallet_b <= 0:
                                         wallet.wallet_balance = 0
