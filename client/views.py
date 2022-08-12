@@ -81,8 +81,7 @@ def ApproveTransaction(request,id):
                 try:
                     if transaction.type == Transaction.WITHDRAWAL:
                         wallet = Wallet.objects.get(profile=transaction.profile)
-                        withdrawable = int(wallet.wallet_balance + wallet.investment_balance) - int(0.08 * (wallet.wallet_balance + wallet.investment_balance)) 
-
+                        withdrawable = int(wallet.wallet_balance + wallet.investment_balance)  
                         
                         try:
                             if transaction.mode == Transaction.BANK:
