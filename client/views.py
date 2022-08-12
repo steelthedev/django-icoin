@@ -93,9 +93,9 @@ def ApproveTransaction(request,id):
                                 wallet.wallet_balance = wallet_b
                             elif transaction.mode == Transaction.USDT:
                                 if not wallet.wallet_balance < (float(transaction.amount) / 0.001795):
-                                    wallet_b = round(int(wallet.wallet_balance - (float(transaction.amount) / 0.001795)))
+                                    wallet_b = int(wallet.wallet_balance * 0.001795) - float(transaction.amount)
                                     if wallet_b > 0:
-                                        wallet.wallet_balance = wallet_b
+                                        wallet.wallet_balance = int(wallet_b / 0.001795)
                                     elif wallet_b < 0:
                                         wallet.wallet_balance = 0
                         except:
