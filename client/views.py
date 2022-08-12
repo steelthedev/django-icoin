@@ -273,12 +273,12 @@ def RequestWithdrawal(request):
                                 return Response(data)
                             except:
                                 return HttpResponse(status=201)
-                            return HttpResponse(status=200)           
+                                
                         else:
                             data["message"] = "Withdraw must be lesser than wallet balance"
                             return Response(data)    
                     elif c_amount:
-                        withdrawable = "{:.2f}".format((wallet.wallet_balance + wallet.investment_balance) * 0.001795)
+                        withdrawable = "{:.3f}".format((wallet.wallet_balance + wallet.investment_balance) * 0.001795)
                         
                         if c_amount <= withdrawable:
                             coin_ref = "usdt-{}".format(randint(0,20000))
