@@ -59,16 +59,19 @@ class OrderSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         items_data = validated_data.pop('items')
         user_wallet = Wallet.objects.get(user = self.context["request"].user)
-        if not user_wallet.Active_investment or user_wallet.wallet_balance > self.validated_data["paid_amount"]:
+        if not user_wallet.Active_investment and user_wallet.wallet_balance >= self.validated_data["paid_amount"]:
             order = Order.objects.create(**validated_data)
             wallet = Wallet.objects.get(profile=order.user.profile)
-            order_item = [OrderItem.objects.create(order=order, **item_data) for item_data in items_data if wallet.wallet_balance > order.paid_amount and not wallet.Active_investment]
+            order_item = [OrderItem.objects.create(order=order, **item_data) for item_data in items_data if wallet.wallet_balance >= order.paid_amount and not wallet.Active_investment]
             
             if order_item:
 
-                if wallet.wallet_balance > order.paid_amount or not wallet.Active_investment:
+                if wallet.wallet_balance >= order.paid_amount and not wallet.Active_investment:
                     wallet.investment_balance = order.paid_amount
-                    wallet.wallet_balance = wallet.wallet_balance - order.paid_amount
+                    wallet_b = wallet.wallet_balance - order.paid_amount
+                    if wallet_b <= 0:
+                        wallet.wallet_balance = 0
+                    wallet.wallet_balance = wallet_b
                     wallet.investment_progress = 0
                     wallet.Active_investment= OrderItem.objects.get(order = order).package
                     wallet.save()
