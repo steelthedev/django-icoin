@@ -76,46 +76,46 @@ def ApproveTransaction(request,id):
             if profile.type == "admin":
                 try:
                     transaction = Transaction.objects.get(pk=id)
-                    try:
-                        if transaction.type == Transaction.WITHDRAWAL:
-                            wallet = Wallet.objects.get(profile=transaction.profile)
-                            withdrawable = int(wallet.wallet_balance + wallet.investment_balance) - int(0.08 * (wallet.wallet_balance + wallet.investment_balance)) 
-
-                            
-                            try:
-                                if transaction.mode == Transaction.BANK:
-                                    if not withdrawable < int(float(transaction.amount)): 
-                                        wallet_b = int(wallet.wallet_balance - float(transaction.amount))
-                                        if wallet_b <= 0:
-                                            wallet.wallet_balance = 0
-                                    
-                                    wallet.wallet_balance = wallet_b
-                                elif transaction.mode == Transaction.USDT:
-                                    if not withdrawable < int(float(transaction.amount) / 0.001795):
-                                        wallet_b = int(wallet.wallet_balance - (float(transaction.amount) / 0.001795))
-                                        if wallet_b > 0:
-                                            wallet.wallet_balance = wallet_b
-                                        elif wallet_b <= 0:
-                                            wallet.wallet_balance = 0
-                            except:
-                                return HttpResponse(status =401)
-                            wallet.investment_balance = 0
-                            wallet.Active_investment = None
-                            wallet.save()
-                        
-                        elif transaction.type == Transaction.DEPOSIT:
-                            
-                            wallet = Wallet.objects.get(profile=transaction.profile)
-                            wallet_b = round(float(transaction.amount) / 0.001795)
-                            wallet.wallet_balance += wallet_b 
-                            wallet.save()
-                    except:
-                        return Response(status=401)
-                    transaction.status = Transaction.SUCCESS
-                    transaction.save()
-                    return Response(status=200)
                 except:
                     return Response( status = 401 )
+                try:
+                    if transaction.type == Transaction.WITHDRAWAL:
+                        wallet = Wallet.objects.get(profile=transaction.profile)
+                        withdrawable = int(wallet.wallet_balance + wallet.investment_balance) - int(0.08 * (wallet.wallet_balance + wallet.investment_balance)) 
+
+                        
+                        try:
+                            if transaction.mode == Transaction.BANK:
+                                if not withdrawable < transaction.amount: 
+                                    wallet_b = wallet.wallet_balance - transaction.amount
+                                    if wallet_b <= 0:
+                                        wallet.wallet_balance = 0
+                                wallet.wallet_balance = wallet_b
+                            elif transaction.mode == Transaction.USDT:
+                                if not withdrawable < (float(transaction.amount) / 0.001795):
+                                    wallet_b = int(wallet.wallet_balance - (float(transaction.amount) / 0.001795))
+                                    if wallet_b > 0:
+                                        wallet.wallet_balance = wallet_b
+                                    elif wallet_b <= 0:
+                                        wallet.wallet_balance = 0
+                        except:
+                            return HttpResponse(status =401)
+                        wallet.investment_balance = 0
+                        wallet.Active_investment = None
+                        wallet.save()
+                    
+                    elif transaction.type == Transaction.DEPOSIT:
+                        
+                        wallet = Wallet.objects.get(profile=transaction.profile)
+                        wallet_b = round(float(transaction.amount) / 0.001795)
+                        wallet.wallet_balance += wallet_b 
+                        wallet.save()
+                except:
+                    return Response(status=401)
+                transaction.status = Transaction.SUCCESS
+                transaction.save()
+                return Response(status=200)
+                
             else:
                 return HttpResponse(status=201)
         
