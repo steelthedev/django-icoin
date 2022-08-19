@@ -103,10 +103,17 @@ def ApproveTransaction(request,id):
                         wallet.Active_investment = None
                         wallet.save()
                     
-                    elif transaction.type == Transaction.DEPOSIT:
+                    elif transaction.type == Transaction.DEPOSIT and transaction.mode == Transaction.USDT:
                         
                         wallet = Wallet.objects.get(profile=transaction.profile)
                         wallet_b = round(float(transaction.amount) / 0.001795)
+                        wallet.wallet_balance += wallet_b 
+                        wallet.save()
+                    elif transaction.type == Transaction.DEPOSIT and transaction.mode == Transaction.BANK:
+                        
+                        wallet = Wallet.objects.get(profile=transaction.profile)
+
+                        wallet_b =int(float(transaction.amount))
                         wallet.wallet_balance += wallet_b 
                         wallet.save()
                 except:

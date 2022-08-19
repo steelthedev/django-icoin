@@ -67,3 +67,25 @@ class coinDeposit(APIView):
                 data["message"] = "Deposit request made, be patient as it takes longer time to approve deposits through usdt"
                 return HttpResponse(status=200)
             return HttpResponse(status = 401)
+
+
+
+
+class bankDeposit(APIView):
+    authentication_classes=[authentication.TokenAuthentication]
+    permission_classes =[permissions.IsAuthenticated]
+    
+
+    def post(self,request):
+        if request.method == "POST":
+            image = request.data.get("image")
+            amount = request.data.get("amount",'')
+            data = {}
+            if image:
+                profile =request.user.profile
+                wallet = Wallet.objects.get(profile =profile)
+                d_ref = "bank-{}".format(randint(0,20000))
+                Transaction.objects.create(profile=profile, wallet=wallet, image=image, amount=amount,mode=Transaction.BANK, transaction_id=d_ref, type=Transaction.DEPOSIT, status=Transaction.PENDING)
+                data["message"] = "Deposit request made, be patient as it takes longer time to approve deposits through usdt"
+                return HttpResponse(status=200)
+            return HttpResponse(status = 401)
