@@ -99,7 +99,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'munt4',
         'USER':'root',
-        'PASSWORD':'kalel2000',
+        'PASSWORD':'',
         'HOST':'localhost',
         'PORT':3306,
         'OPTIONS': {
