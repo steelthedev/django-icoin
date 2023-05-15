@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=5pz%#6tsl$**r(o+%pt8)3bjm!11lc65mzw$h!il776!kwk!3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = TRUE
 
-ALLOWED_HOSTS = ['localhost', '178.79.137.116', 'api.muntpay.com', '127.0.0.1']
+ALLOWED_HOSTS = ['']
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'djangoicoin.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -93,20 +93,6 @@ DATABASES = {
     }
 }
 
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'munt4',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':3306,
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
-    }
-}
 
 
 # Password validation
@@ -164,8 +150,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER="muntpay@gmail.com"
-EMAIL_HOST_PASSWORD="jugpvtvgwgchobts"
 
 
 PASSWORD_HASHERS = [
@@ -180,7 +164,7 @@ PASSWORD_HASHERS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "https://muntpay.com",
+
     
     
 ]
@@ -227,5 +211,5 @@ REST_FRAMEWORK = {
 
 
 
-WEBSITE_URL = "https://api.muntpay.com"
+WEBSITE_URL = "http://127.0.0.1:8000"
 LOCAL_URL = "http://127.0.0.1:8000"
