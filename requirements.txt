@@ -6,7 +6,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 cryptography==37.0.4
 defusedxml==0.7.1
-Django==4.0.6
+Django==4.1.10
 django-cors-headers==3.13.0
 django-rest-framework==0.1.0
 django-rest-resetpassword==0.1.2
